@@ -1,13 +1,15 @@
 package yamsroun.splearnself.domain;
 
-import java.util.Objects;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
 @ToString
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Member {
 
     private String email;
@@ -15,15 +17,13 @@ public class Member {
     private String passwordHash;
     private MemberStatus status;
 
-    private Member(String email, String nickname, String passwordHash) {
-        this.email = Objects.requireNonNull(email);
-        this.nickname = Objects.requireNonNull(nickname);
-        this.passwordHash = Objects.requireNonNull(passwordHash);
-        this.status = MemberStatus.PENDING;
-    }
-
-    public static Member create(String email, String nickname, String password, PasswordEncoder passwordEncoder) {
-        return new Member(email, nickname, passwordEncoder.encode(password));
+    public static Member create(MemberCreateRequest request, PasswordEncoder passwordEncoder) {
+        Member member = new Member();
+        member.email = requireNonNull(request.email());
+        member.nickname = requireNonNull(request.nickname());
+        member.passwordHash = requireNonNull(passwordEncoder.encode(request.password()));
+        member.status = MemberStatus.PENDING;
+        return member;
     }
 
     void activate() {
@@ -41,10 +41,14 @@ public class Member {
     }
 
     void changeNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = requireNonNull(nickname);
     }
 
     void changePassword(String password, PasswordEncoder passwordEncoder) {
-        this.passwordHash = passwordEncoder.encode(password);
+        this.passwordHash = passwordEncoder.encode(requireNonNull(password));
+    }
+
+    boolean isActive() {
+        return this.status == MemberStatus.ACTIVE;
     }
 }
