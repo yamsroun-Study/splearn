@@ -17,7 +17,7 @@ public class Member {
     private String passwordHash;
     private MemberStatus status;
 
-    public static Member create(MemberCreateRequest request, PasswordEncoder passwordEncoder) {
+    public static Member register(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.email = new Email(request.email());
         member.nickname = requireNonNull(request.nickname());
