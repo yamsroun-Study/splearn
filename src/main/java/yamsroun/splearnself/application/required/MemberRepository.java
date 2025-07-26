@@ -1,7 +1,9 @@
 package yamsroun.splearnself.application.required;
 
 import org.springframework.data.repository.Repository;
+import java.util.Optional;
 
+import yamsroun.splearnself.domain.Email;
 import yamsroun.splearnself.domain.Member;
 
 /**
@@ -10,4 +12,6 @@ import yamsroun.splearnself.domain.Member;
 public interface MemberRepository extends Repository<Member, Long> {
 
     Member save(Member member);
+
+    Optional<Member> findByEmail(Email email);
 }
