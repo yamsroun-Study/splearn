@@ -2,6 +2,8 @@ package yamsroun.splearnself.domain;
 
 import jakarta.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
 @Entity
+@NaturalIdCache
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
@@ -20,6 +23,7 @@ public class Member {
     private Long id;
 
     @Embedded
+    @NaturalId
     private Email email;
 
     private String nickname;
