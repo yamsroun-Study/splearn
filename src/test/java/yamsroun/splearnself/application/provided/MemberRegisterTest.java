@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfig.class)
-//@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-public record MemberRegisterTest(
+    //@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+record MemberRegisterTest(
     MemberRegister memberRegister,
     EntityManager entityManager
 ) {
@@ -33,7 +33,7 @@ public record MemberRegisterTest(
 
     @Test
     void duplicateEmailFail() {
-        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        memberRegister.register(MemberFixture.createMemberRegisterRequest());
 
         assertThatThrownBy(() -> memberRegister.register(MemberFixture.createMemberRegisterRequest()))
             .isInstanceOf(DuplicateEmailException.class);
@@ -41,13 +41,13 @@ public record MemberRegisterTest(
 
     @Test
     void memberRegisterRequestFail() {
-        extracted(new MemberRegisterRequest("jj@lim.com", "JJ", "longsecret"));
-        extracted(new MemberRegisterRequest("jj@lim.com", "JJ Lim JJ Lim JJ Lim JJ Lim", "longsecret"));
-        extracted(new MemberRegisterRequest("jj-lim.com", "JJ Lim", "longsecret"));
-        //extracted(new MemberRegisterRequest("jj@lim.com", null, "longsecret"));
+        checkValidation(new MemberRegisterRequest("jj@lim.com", "JJ", "longsecret"));
+        checkValidation(new MemberRegisterRequest("jj@lim.com", "JJ Lim JJ Lim JJ Lim JJ Lim", "longsecret"));
+        checkValidation(new MemberRegisterRequest("jj-lim.com", "JJ Lim", "longsecret"));
+        //checkValidation(new MemberRegisterRequest("jj@lim.com", null, "longsecret"));
     }
 
-    private void extracted(MemberRegisterRequest invalid) {
+    private void checkValidation(MemberRegisterRequest invalid) {
         assertThatThrownBy(() -> memberRegister.register(invalid))
             .isInstanceOf(ConstraintViolationException.class);
     }
@@ -60,7 +60,7 @@ public record MemberRegisterTest(
 
         member = memberRegister.activate(member.getId());
         entityManager.flush();
-        
+
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
     }
 }
