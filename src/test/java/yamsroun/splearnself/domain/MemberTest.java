@@ -61,7 +61,7 @@ class MemberTest {
 
     @Test
     void verifyPassword() {
-        boolean verified = member.verifyPassword("secret", passwordEncoder);
+        boolean verified = member.verifyPassword("secretsecret", passwordEncoder);
         assertThat(verified).isTrue();
         boolean verified2 = member.verifyPassword("hello", passwordEncoder);
         assertThat(verified2).isFalse();
@@ -69,7 +69,7 @@ class MemberTest {
 
     @Test
     void changeNickname() {
-        assertThat(member.getNickname()).isEqualTo("JJ");
+        assertThat(member.getNickname()).isEqualTo("JJ Lim");
 
         member.changeNickname("yamsroun");
         assertThat(member.getNickname()).isEqualTo("yamsroun");

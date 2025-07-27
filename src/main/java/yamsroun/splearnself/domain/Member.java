@@ -42,29 +42,29 @@ public class Member {
         return member;
     }
 
-    void activate() {
+    public void activate() {
         state(this.status == MemberStatus.PENDING, "PENDING 상태가 아닙니다.");
         this.status = MemberStatus.ACTIVE;
     }
 
-    void deactivate() {
+    public void deactivate() {
         state(this.status == MemberStatus.ACTIVE, "ACTIVE 상태가 아닙니다.");
         this.status = MemberStatus.DEACTIVATED;
     }
 
-    boolean verifyPassword(String secret, PasswordEncoder passwordEncoder) {
+    public boolean verifyPassword(String secret, PasswordEncoder passwordEncoder) {
         return passwordEncoder.matches(secret, this.passwordHash);
     }
 
-    void changeNickname(String nickname) {
+    public void changeNickname(String nickname) {
         this.nickname = requireNonNull(nickname);
     }
 
-    void changePassword(String password, PasswordEncoder passwordEncoder) {
+    public void changePassword(String password, PasswordEncoder passwordEncoder) {
         this.passwordHash = passwordEncoder.encode(requireNonNull(password));
     }
 
-    boolean isActive() {
+    public boolean isActive() {
         return this.status == MemberStatus.ACTIVE;
     }
 }

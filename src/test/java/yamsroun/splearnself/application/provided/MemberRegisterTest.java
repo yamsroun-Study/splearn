@@ -1,15 +1,15 @@
 package yamsroun.splearnself.application.provided;
 
+import jakarta.persistence.EntityManager;
+import jakarta.validation.ConstraintViolationException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 import yamsroun.splearnself.SplearnTestConfig;
-import yamsroun.splearnself.domain.DuplicateEmailException;
-import yamsroun.splearnself.domain.Member;
-import yamsroun.splearnself.domain.MemberFixture;
-import yamsroun.splearnself.domain.MemberStatus;
+import yamsroun.splearnself.domain.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -19,7 +19,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Import(SplearnTestConfig.class)
 //@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 public record MemberRegisterTest(
-    MemberRegister memberRegister
+    MemberRegister memberRegister,
+    EntityManager entityManager
 ) {
 
     @Test
@@ -36,5 +37,30 @@ public record MemberRegisterTest(
 
         assertThatThrownBy(() -> memberRegister.register(MemberFixture.createMemberRegisterRequest()))
             .isInstanceOf(DuplicateEmailException.class);
+    }
+
+    @Test
+    void memberRegisterRequestFail() {
+        extracted(new MemberRegisterRequest("jj@lim.com", "JJ", "longsecret"));
+        extracted(new MemberRegisterRequest("jj@lim.com", "JJ Lim JJ Lim JJ Lim JJ Lim", "longsecret"));
+        extracted(new MemberRegisterRequest("jj-lim.com", "JJ Lim", "longsecret"));
+        //extracted(new MemberRegisterRequest("jj@lim.com", null, "longsecret"));
+    }
+
+    private void extracted(MemberRegisterRequest invalid) {
+        assertThatThrownBy(() -> memberRegister.register(invalid))
+            .isInstanceOf(ConstraintViolationException.class);
+    }
+
+    @Test
+    void activate() {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        entityManager.flush();
+        entityManager.clear();
+
+        member = memberRegister.activate(member.getId());
+        entityManager.flush();
+        
+        assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
     }
 }
