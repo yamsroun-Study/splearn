@@ -14,6 +14,7 @@ import yamsroun.splearnself.domain.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@SuppressWarnings("ImplicitSubclassInspection")
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfig.class)
@@ -26,6 +27,7 @@ record MemberRegisterTest(
     @Test
     void register() {
         Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        System.out.println(">>> member: " + member);
 
         assertThat(member.getId()).isPositive();
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);

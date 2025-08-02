@@ -15,7 +15,7 @@ import static org.springframework.util.Assert.state;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@ToString
+@ToString(callSuper = true)
 public class Member extends AbstractEntity {
 
     @NaturalId
