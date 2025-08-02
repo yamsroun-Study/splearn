@@ -1,9 +1,8 @@
 package yamsroun.splearnself.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,26 +11,19 @@ import lombok.ToString;
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
+//XML은 Annotation 설정을 Override한다.
 @Entity
-@NaturalIdCache
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
-public class Member {
+public class Member extends AbstractEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Embedded
     @NaturalId
     private Email email;
 
     private String nickname;
     private String passwordHash;
-
-    @Enumerated(EnumType.STRING)
     private MemberStatus status;
-
 
     public static Member register(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         Member member = new Member();
