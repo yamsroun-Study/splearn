@@ -1,4 +1,4 @@
-//package yamsroun.splearnself.application.provided;
+//package yamsroun.splearnself.application.member.provided;
 //
 //import org.junit.jupiter.api.Test;
 //import org.mockito.Mockito;
@@ -9,12 +9,12 @@
 //import lombok.Getter;
 //
 //import yamsroun.splearnself.application.MemberService;
-//import yamsroun.splearnself.application.required.EmailSender;
-//import yamsroun.splearnself.application.required.MemberRepository;
-//import yamsroun.splearnself.domain.Email;
-//import yamsroun.splearnself.domain.Member;
-//import yamsroun.splearnself.domain.MemberFixture;
-//import yamsroun.splearnself.domain.MemberStatus;
+//import yamsroun.splearnself.application.member.required.EmailSender;
+//import yamsroun.splearnself.application.member.required.MemberRepository;
+//import yamsroun.splearnself.domain.shared.Email;
+//import yamsroun.splearnself.domain.member.Member;
+//import yamsroun.splearnself.domain.member.MemberFixture;
+//import yamsroun.splearnself.domain.member.MemberStatus;
 //
 //import static org.assertj.core.api.Assertions.assertThat;
 //import static org.mockito.ArgumentMatchers.any;

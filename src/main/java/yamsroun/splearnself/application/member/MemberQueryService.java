@@ -1,13 +1,13 @@
-package yamsroun.splearnself.application;
+package yamsroun.splearnself.application.member;
 
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
-import yamsroun.splearnself.application.provided.MemberFinder;
-import yamsroun.splearnself.application.required.MemberRepository;
-import yamsroun.splearnself.domain.Member;
+import yamsroun.splearnself.application.member.provided.MemberFinder;
+import yamsroun.splearnself.application.member.required.MemberRepository;
+import yamsroun.splearnself.domain.member.Member;
 
 @Service
 @Transactional

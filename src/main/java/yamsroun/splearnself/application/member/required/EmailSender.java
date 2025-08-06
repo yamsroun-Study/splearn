@@ -1,6 +1,6 @@
-package yamsroun.splearnself.application.required;
+package yamsroun.splearnself.application.member.required;
 
-import yamsroun.splearnself.domain.Email;
+import yamsroun.splearnself.domain.shared.Email;
 
 /**
  * 이메일을 발송한다

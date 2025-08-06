@@ -3,8 +3,8 @@ package yamsroun.splearnself.adaptor.integration;
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
 
-import yamsroun.splearnself.application.required.EmailSender;
-import yamsroun.splearnself.domain.Email;
+import yamsroun.splearnself.application.member.required.EmailSender;
+import yamsroun.splearnself.domain.shared.Email;
 
 @Component
 @Fallback

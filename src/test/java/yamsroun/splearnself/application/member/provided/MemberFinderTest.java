@@ -1,4 +1,4 @@
-package yamsroun.splearnself.application.provided;
+package yamsroun.splearnself.application.member.provided;
 
 import jakarta.persistence.EntityManager;
 
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 import yamsroun.splearnself.SplearnTestConfig;
-import yamsroun.splearnself.domain.Member;
-import yamsroun.splearnself.domain.MemberFixture;
+import yamsroun.splearnself.domain.member.Member;
+import yamsroun.splearnself.domain.member.MemberFixture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

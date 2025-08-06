@@ -3,7 +3,7 @@ package yamsroun.splearnself.adaptor.security;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import yamsroun.splearnself.domain.PasswordEncoder;
+import yamsroun.splearnself.domain.member.PasswordEncoder;
 
 @Component
 public class SecurePasswordEncoder implements PasswordEncoder {

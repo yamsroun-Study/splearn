@@ -1,4 +1,4 @@
-package yamsroun.splearnself.domain;
+package yamsroun.splearnself.domain.shared;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

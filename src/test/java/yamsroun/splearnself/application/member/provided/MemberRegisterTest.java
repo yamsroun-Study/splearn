@@ -1,4 +1,4 @@
-package yamsroun.splearnself.application.provided;
+package yamsroun.splearnself.application.member.provided;
 
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 import yamsroun.splearnself.SplearnTestConfig;
-import yamsroun.splearnself.domain.*;
+import yamsroun.splearnself.domain.member.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

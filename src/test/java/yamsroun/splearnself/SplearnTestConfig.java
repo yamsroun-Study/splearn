@@ -3,9 +3,9 @@ package yamsroun.splearnself;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
-import yamsroun.splearnself.application.required.EmailSender;
-import yamsroun.splearnself.domain.MemberFixture;
-import yamsroun.splearnself.domain.PasswordEncoder;
+import yamsroun.splearnself.application.member.required.EmailSender;
+import yamsroun.splearnself.domain.member.MemberFixture;
+import yamsroun.splearnself.domain.member.PasswordEncoder;
 
 @TestConfiguration
 public class SplearnTestConfig {

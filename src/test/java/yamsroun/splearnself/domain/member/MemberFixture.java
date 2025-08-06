@@ -1,4 +1,4 @@
-package yamsroun.splearnself.domain;
+package yamsroun.splearnself.domain.member;
 
 public class MemberFixture {
 

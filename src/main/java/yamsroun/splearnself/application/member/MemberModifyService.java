@@ -1,15 +1,19 @@
-package yamsroun.splearnself.application;
+package yamsroun.splearnself.application.member;
 
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
-import yamsroun.splearnself.application.provided.MemberFinder;
-import yamsroun.splearnself.application.provided.MemberRegister;
-import yamsroun.splearnself.application.required.EmailSender;
-import yamsroun.splearnself.application.required.MemberRepository;
-import yamsroun.splearnself.domain.*;
+import yamsroun.splearnself.application.member.provided.MemberFinder;
+import yamsroun.splearnself.application.member.provided.MemberRegister;
+import yamsroun.splearnself.application.member.required.EmailSender;
+import yamsroun.splearnself.application.member.required.MemberRepository;
+import yamsroun.splearnself.domain.member.DuplicateEmailException;
+import yamsroun.splearnself.domain.member.Member;
+import yamsroun.splearnself.domain.member.MemberRegisterRequest;
+import yamsroun.splearnself.domain.member.PasswordEncoder;
+import yamsroun.splearnself.domain.shared.Email;
 
 @Service
 @Transactional

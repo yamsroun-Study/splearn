@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
 import org.junitpioneer.jupiter.StdOut;
 
-import yamsroun.splearnself.domain.Email;
+import yamsroun.splearnself.domain.shared.Email;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,11 +1,11 @@
-package yamsroun.splearnself.application.provided;
+package yamsroun.splearnself.application.member.provided;
 
 import jakarta.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
 
-import yamsroun.splearnself.domain.Member;
-import yamsroun.splearnself.domain.MemberRegisterRequest;
+import yamsroun.splearnself.domain.member.Member;
+import yamsroun.splearnself.domain.member.MemberRegisterRequest;
 
 /**
  * 회원의 등록과 관련된 기능을 제공한다

@@ -1,12 +1,19 @@
-package yamsroun.splearnself.domain;
+package yamsroun.splearnself.domain.member;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToOne;
 
 import org.hibernate.annotations.NaturalId;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import yamsroun.splearnself.domain.AbstractEntity;
+import yamsroun.splearnself.domain.shared.Email;
 
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
@@ -15,7 +22,7 @@ import static org.springframework.util.Assert.state;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"detail"})
 public class Member extends AbstractEntity {
 
     @NaturalId
@@ -25,26 +32,32 @@ public class Member extends AbstractEntity {
     private String passwordHash;
     private MemberStatus status;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MemberDetail detail;
 
-    
+
     public static Member register(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.email = new Email(request.email());
         member.nickname = requireNonNull(request.nickname());
         member.passwordHash = requireNonNull(passwordEncoder.encode(request.password()));
         member.status = MemberStatus.PENDING;
+
+        member.detail = MemberDetail.create();
+
         return member;
     }
 
     public void activate() {
         state(this.status == MemberStatus.PENDING, "PENDING 상태가 아닙니다.");
         this.status = MemberStatus.ACTIVE;
+        this.detail.activate();
     }
 
     public void deactivate() {
         state(this.status == MemberStatus.ACTIVE, "ACTIVE 상태가 아닙니다.");
         this.status = MemberStatus.DEACTIVATED;
+        this.detail.deactivate();
     }
 
     public boolean verifyPassword(String secret, PasswordEncoder passwordEncoder) {
@@ -53,6 +66,11 @@ public class Member extends AbstractEntity {
 
     public void changeNickname(String nickname) {
         this.nickname = requireNonNull(nickname);
+    }
+
+    public void updateInfo(MemberInfoUpdateRequest updateRequest) {
+        this.nickname = Objects.requireNonNull(updateRequest.nickname());
+        this.detail.updateInfo(updateRequest);
     }
 
     public void changePassword(String password, PasswordEncoder passwordEncoder) {

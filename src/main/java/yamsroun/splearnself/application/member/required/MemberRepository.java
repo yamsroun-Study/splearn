@@ -1,10 +1,10 @@
-package yamsroun.splearnself.application.required;
+package yamsroun.splearnself.application.member.required;
 
 import org.springframework.data.repository.Repository;
 import java.util.Optional;
 
-import yamsroun.splearnself.domain.Email;
-import yamsroun.splearnself.domain.Member;
+import yamsroun.splearnself.domain.member.Member;
+import yamsroun.splearnself.domain.shared.Email;
 
 /**
  * 회원 정보를 저장하거나 조회한다
