@@ -25,6 +25,9 @@ public class Member extends AbstractEntity {
     private String passwordHash;
     private MemberStatus status;
 
+    private MemberDetail detail;
+
+    
     public static Member register(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.email = new Email(request.email());
