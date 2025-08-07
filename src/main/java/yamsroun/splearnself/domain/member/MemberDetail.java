@@ -1,6 +1,5 @@
 package yamsroun.splearnself.domain.member;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 
 import org.springframework.util.Assert;
@@ -19,9 +18,7 @@ import yamsroun.splearnself.domain.AbstractEntity;
 @ToString(callSuper = true)
 public class MemberDetail extends AbstractEntity {
 
-    @Embedded
     private Profile profile;
-
     private String introduction;
     private LocalDateTime registeredAt;
     private LocalDateTime activatedAt;

@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
 import yamsroun.splearnself.domain.member.Member;
+import yamsroun.splearnself.domain.member.MemberInfoUpdateRequest;
 import yamsroun.splearnself.domain.member.MemberRegisterRequest;
 
 /**
@@ -16,4 +17,8 @@ public interface MemberRegister {
     Member register(@Valid MemberRegisterRequest registerRequest);
 
     Member activate(Long memberId);
+
+    Member deactivate(Long memberId);
+
+    Member updateInfo(Long memberId, @Valid MemberInfoUpdateRequest updateRequest);
 }

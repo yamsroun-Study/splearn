@@ -1,12 +1,9 @@
 package yamsroun.splearnself.domain.member;
 
-import jakarta.persistence.Embeddable;
-
 import org.springframework.util.StringUtils;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-@Embeddable
 public record Profile(String address) {
 
     private static final Pattern PROFILE_PATTERN = Pattern.compile("[a-z0-9]+");

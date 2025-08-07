@@ -1,9 +1,6 @@
 package yamsroun.splearnself.domain.member;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
 
 import org.hibernate.annotations.NaturalId;
 import java.util.Objects;
@@ -32,7 +29,7 @@ public class Member extends AbstractEntity {
     private String passwordHash;
     private MemberStatus status;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MemberDetail detail;
 
 

@@ -20,9 +20,9 @@
 			<unique-constraint name="uk_member_email_address">
 				<column-name>email_address</column-name>
 			</unique-constraint>
-			<!--<unique-constraint name="uk_member_detail_id">
+			<unique-constraint name="uk_member_detail_id">
 				<column-name>detail_id</column-name>
-			</unique-constraint>-->
+			</unique-constraint>
 		</table>
 		<attributes>
 			<basic name="nickname">
@@ -35,19 +35,19 @@
 				<column name="status" nullable="false" length="50" />
 				<enumerated>STRING</enumerated>
 			</basic>
-			<!--<one-to-one name="detail" fetch="LAZY">
+			<one-to-one name="detail" fetch="LAZY">
 				<cascade>
 					<cascade-all />
 				</cascade>
-			</one-to-one>-->
+			</one-to-one>
 			<embedded name="email">
 			</embedded>
 		</attributes>
 	</entity>
 
-	<!--<entity class="yamsroun.splearnself.domain.member.MemberDetail">
+	<entity class="yamsroun.splearnself.domain.member.MemberDetail">
 		<table name="member_detail">
-			<unique-constraint name="UK_MEMBER_DETAIL_PROFILE_ADDRESS">
+			<unique-constraint name="uk_member_detail_profile_address">
 				<column-name>profile_address</column-name>
 			</unique-constraint>
 		</table>
@@ -66,15 +66,15 @@
 			</basic>
 			<embedded name="profile" />
 		</attributes>
-	</entity>-->
+	</entity>
 
-	<!--<embeddable class="yamsroun.splearnself.domain.member.Profile">
+	<embeddable class="yamsroun.splearnself.domain.member.Profile">
 		<attributes>
 			<basic name="address">
 				<column name="profile_address" length="20" />
 			</basic>
 		</attributes>
-	</embeddable>-->
+	</embeddable>
 
 	<embeddable class="yamsroun.splearnself.domain.shared.Email">
 		<attributes>

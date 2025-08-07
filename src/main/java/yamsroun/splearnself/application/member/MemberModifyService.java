@@ -9,10 +9,7 @@ import yamsroun.splearnself.application.member.provided.MemberFinder;
 import yamsroun.splearnself.application.member.provided.MemberRegister;
 import yamsroun.splearnself.application.member.required.EmailSender;
 import yamsroun.splearnself.application.member.required.MemberRepository;
-import yamsroun.splearnself.domain.member.DuplicateEmailException;
-import yamsroun.splearnself.domain.member.Member;
-import yamsroun.splearnself.domain.member.MemberRegisterRequest;
-import yamsroun.splearnself.domain.member.PasswordEncoder;
+import yamsroun.splearnself.domain.member.*;
 import yamsroun.splearnself.domain.shared.Email;
 
 @Service
@@ -55,6 +52,20 @@ public class MemberModifyService implements MemberRegister {
         // Update 시에도 save()를 호출해야 Repository 기술 변경 시, 수정이 발생하지 않는다.
         // 또한, Spring Data는 Domain Event Publication을 지원하는데, Update 시에도 save()를 호출해야만 이벤트가 발행된다.
         // Auditing을 위해서도 save() 호출이 필요하다. -> 정확한 이유는 모르겠음
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+        member.deactivate();
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
+        Member member = memberFinder.find(memberId);
+        member.updateInfo(updateRequest);
         return memberRepository.save(member);
     }
 }
