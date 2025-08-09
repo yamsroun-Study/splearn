@@ -12,15 +12,15 @@ class ProfileTest {
             new Profile("jjlim");
             new Profile("jjlim123");
             new Profile("12345");
+            new Profile("");
         }).doesNotThrowAnyException();
     }
 
     @Test
     void profileFail() {
-        assertThatThrownBy(() -> new Profile(null)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Profile("")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("toloooooooooooong")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("upperCase")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Profile("프로필")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

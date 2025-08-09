@@ -3,6 +3,7 @@ package yamsroun.splearnself.application.member;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 
 import yamsroun.splearnself.application.member.provided.MemberFinder;
@@ -65,7 +66,24 @@ public class MemberModifyService implements MemberRegister {
     @Override
     public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
         Member member = memberFinder.find(memberId);
+        validateDuplicateProfile(member, updateRequest.profileAddress());
+
         member.updateInfo(updateRequest);
         return memberRepository.save(member);
+    }
+
+    private void validateDuplicateProfile(Member member, String profileAddress) {
+        if (!StringUtils.hasText(profileAddress)) {
+            return;
+        }
+        Profile profile = member.getDetail().getProfile();
+        if (profile != null && profile.address().equals(profileAddress)) {
+            return;
+        }
+
+        boolean found = memberRepository.findByProfile(new Profile(profileAddress)).isPresent();
+        if (found) {
+            throw new DuplicateProfileException("이미 사용 중인 프로필 주소입니다: " + profileAddress);
+        }
     }
 }

@@ -86,6 +86,7 @@ record MemberRegisterTest(
     @Test
     void updateInfo() {
         Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        memberRegister.activate(member.getId());
         entityManager.flush();
         entityManager.clear();
 
@@ -95,5 +96,43 @@ record MemberRegisterTest(
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getDetail().getProfile().address()).isEqualTo(request.profileAddress());
         assertThat(member.getDetail().getIntroduction()).isEqualTo(request.introduction());
+    }
+
+    @Test
+    void updateInfoFail() {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        Long memberId = member.getId();
+        memberRegister.activate(memberId);
+
+        var request = new MemberInfoUpdateRequest("jjlim", "yamsroun", "자기소개");
+        memberRegister.updateInfo(memberId, request);
+
+        Member otherMember = memberRegister.register(MemberFixture.createMemberRegisterRequest("other@abc.com"));
+        Long otherMemberId = otherMember.getId();
+        memberRegister.activate(otherMemberId);
+        entityManager.flush();
+        entityManager.clear();
+
+        // otherMember는 기존 회원과 같은 프로필 주소를 사용할 수 없다
+        var request2 = new MemberInfoUpdateRequest("jjlim2", "yamsroun", "자기소개2");
+        assertThatThrownBy(() -> memberRegister.updateInfo(otherMemberId, request2))
+            .isInstanceOf(DuplicateProfileException.class);
+
+        // 다른 프로필 주소로는 변경 가능
+        var request3 = new MemberInfoUpdateRequest("jjlim2", "yamsroun2", "자기소개2");
+        memberRegister.updateInfo(otherMemberId, request3);
+
+        // 기존 프로필 주소를 바꾸는 것도 가능
+        var request4 = new MemberInfoUpdateRequest("jjlim", "yamsroun", "자기소개");
+        memberRegister.updateInfo(memberId, request4);
+
+        // 프로필 주소를 제거하는 것도 가능
+        var request5 = new MemberInfoUpdateRequest("jjlim", "", "자기소개");
+        memberRegister.updateInfo(memberId, request5);
+
+        // 프로필 주소 중복은 허용하지 않음
+        var request6 = new MemberInfoUpdateRequest("jjlim", "yamsroun2", "자기소개");
+        assertThatThrownBy(() -> memberRegister.updateInfo(memberId, request6))
+            .isInstanceOf(DuplicateProfileException.class);
     }
 }
