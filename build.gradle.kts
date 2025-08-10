@@ -48,6 +48,8 @@ dependencies {
 
     testImplementation("org.mockito:mockito-core:5.18.0")
     mockitoAgent("org.mockito:mockito-core:5.18.0") { isTransitive = false }
+
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
 }
 
 tasks.withType<Test> {
