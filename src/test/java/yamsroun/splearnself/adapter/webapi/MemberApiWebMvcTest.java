@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.webapi;
+package yamsroun.splearnself.adapter.webapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

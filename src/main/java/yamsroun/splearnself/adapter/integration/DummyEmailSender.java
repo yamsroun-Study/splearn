@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.integration;
+package yamsroun.splearnself.adapter.integration;
 
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;

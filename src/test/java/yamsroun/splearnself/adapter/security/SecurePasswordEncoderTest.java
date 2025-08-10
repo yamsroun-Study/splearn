@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.security;
+package yamsroun.splearnself.adapter.security;
 
 import org.junit.jupiter.api.Test;
 

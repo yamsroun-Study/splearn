@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor;
+package yamsroun.splearnself.adapter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

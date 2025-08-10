@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.webapi;
+package yamsroun.splearnself.adapter.webapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.UnsupportedEncodingException;
 import lombok.RequiredArgsConstructor;
 
-import yamsroun.splearnself.adaptor.webapi.dto.MemberRegisterResponse;
+import yamsroun.splearnself.adapter.webapi.dto.MemberRegisterResponse;
 import yamsroun.splearnself.application.member.provided.MemberRegister;
 import yamsroun.splearnself.application.member.required.MemberRepository;
 import yamsroun.splearnself.domain.member.Member;

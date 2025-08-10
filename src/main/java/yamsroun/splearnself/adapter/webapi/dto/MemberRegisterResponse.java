@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.webapi.dto;
+package yamsroun.splearnself.adapter.webapi.dto;
 
 import yamsroun.splearnself.domain.member.Member;
 

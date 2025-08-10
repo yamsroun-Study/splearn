@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.webapi;
+package yamsroun.splearnself.adapter.webapi;
 
 import jakarta.validation.Valid;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
-import yamsroun.splearnself.adaptor.webapi.dto.MemberRegisterResponse;
+import yamsroun.splearnself.adapter.webapi.dto.MemberRegisterResponse;
 import yamsroun.splearnself.application.member.provided.MemberRegister;
 import yamsroun.splearnself.domain.member.Member;
 import yamsroun.splearnself.domain.member.MemberRegisterRequest;

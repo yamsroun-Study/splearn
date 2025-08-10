@@ -1,4 +1,4 @@
-package yamsroun.splearnself.adaptor.integration;
+package yamsroun.splearnself.adapter.integration;
 
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
